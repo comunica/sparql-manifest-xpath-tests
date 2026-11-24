@@ -7,18 +7,18 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/jitsedesmet/sparql-manifest-xpath-tests/actions/workflows/pages.yml"><img src="https://github.com/jitsedesmet/sparql-manifest-xpath-tests/actions/workflows/pages.yml/badge.svg?branch=main" alt="Build Status"></a>
+  <a href="https://github.com/comunica/sparql-manifest-xpath-tests/actions/workflows/pages.yml"><img src="https://github.com/comunica/sparql-manifest-xpath-tests/actions/workflows/pages.yml/badge.svg?branch=main" alt="Build Status"></a>
 </p>
 
-**[Use the manifest at https://sparql-manifest-xpath-tests.jitsedesmet.be/manifest.ttl](https://sparql-manifest-xpath-tests.jitsedesmet.be/manifest.ttl).**
+**[Use the manifest at https://comunica.github.io/sparql-manifest-xpath-tests/manifest.ttl](https://comunica.github.io/sparql-manifest-xpath-tests/manifest.ttl).**
 
 The tests are divided over three manifests:
 
 | Manifest | Tests |
 | --- | --- |
-| [`manifest.ttl`](https://sparql-manifest-xpath-tests.jitsedesmet.be/manifest.ttl) | Tests that only need what SPARQL defines. |
-| [`extensions.ttl`](https://sparql-manifest-xpath-tests.jitsedesmet.be/extensions.ttl) | Tests that need XPath functions and operators beyond what SPARQL defines, such as the ones on `xsd:date`, `xsd:time` and the durations, which many engines support as an extension. |
-| [`errors.ttl`](https://sparql-manifest-xpath-tests.jitsedesmet.be/errors.ttl) | Tests that accept an error, as their only expected result or as one of the alternatives. As an engine passes these when it fails for any reason, such as not supporting a function, they say little on their own. |
+| [`manifest.ttl`](https://comunica.github.io/sparql-manifest-xpath-tests/manifest.ttl) | Tests that only need what SPARQL defines. |
+| [`extensions.ttl`](https://comunica.github.io/sparql-manifest-xpath-tests/extensions.ttl) | Tests that need XPath functions and operators beyond what SPARQL defines, such as the ones on `xsd:date`, `xsd:time` and the durations, which many engines support as an extension. |
+| [`errors.ttl`](https://comunica.github.io/sparql-manifest-xpath-tests/errors.ttl) | Tests that accept an error, as their only expected result or as one of the alternatives. As an engine passes these when it fails for any reason, such as not supporting a function, they say little on their own. |
 
 SPARQL defines most of its functions and operators in terms of
 [XPath and XQuery Functions and Operators](https://www.w3.org/TR/xpath-functions-31/).
@@ -33,13 +33,13 @@ Each manifest includes a sub-manifest per QT3 test set.
 With rdf-test-suite, the tests can be run against an engine as follows:
 
 ```bash
-$ rdf-test-suite path/to/engine.js https://sparql-manifest-xpath-tests.jitsedesmet.be/manifest.ttl -c .rdf-test-suite-cache/
+$ rdf-test-suite path/to/engine.js https://comunica.github.io/sparql-manifest-xpath-tests/manifest.ttl -c .rdf-test-suite-cache/
 ```
 
 and likewise for `extensions.ttl` and `errors.ttl`.
 
 A locally generated version can be run by mapping the URL onto the `dist/` folder,
-with `-m 'https://sparql-manifest-xpath-tests.jitsedesmet.be/~path/to/dist/'`.
+with `-m 'https://comunica.github.io/sparql-manifest-xpath-tests/~path/to/dist/'`.
 
 ## How the tests are generated
 
@@ -80,7 +80,7 @@ Test cases that cannot be expressed in SPARQL are left out, such as XPath expres
 assertions that need more than the above, such as `assert` with an arbitrary XPath expression,
 and casts of a string literal that are folded into a literal, but of which the string is not a valid number,
 such as `xs:byte("300")`, which are an error in XPath but an ill-typed literal in SPARQL.
-[`left-out.tsv`](https://sparql-manifest-xpath-tests.jitsedesmet.be/left-out.tsv) lists every left-out test case with the reason,
+[`left-out.tsv`](https://comunica.github.io/sparql-manifest-xpath-tests/left-out.tsv) lists every left-out test case with the reason,
 including the ones that depend on more than XPath 3.1 and XSD 1.1 without optional features.
 The XPath expressions are parsed with [fontoxpath](https://github.com/FontoXML/fontoxpath),
 and the SPARQL is generated with [Traqula](https://github.com/comunica/traqula).
@@ -97,7 +97,7 @@ This project requires [Node.JS](http://nodejs.org/) 22.18 or higher and the [Yar
 It can be setup by cloning and installing it as follows:
 
 ```bash
-$ git clone https://github.com/jitsedesmet/sparql-manifest-xpath-tests.git
+$ git clone https://github.com/comunica/sparql-manifest-xpath-tests.git
 $ cd sparql-manifest-xpath-tests
 $ yarn install
 ```
@@ -127,5 +127,5 @@ This code is released under the [MIT license](https://opensource.org/license/MIT
 The generated tests are derived from QT3, Copyright © W3C® (MIT, ERCIM, Keio, Beihang),
 and are released under the [W3C Software and Document License](https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document),
 of which the full text is in [`LICENSE-W3C.txt`](LICENSE-W3C.txt).
-The generator publishes it with the tests as [`LICENSE.txt`](https://sparql-manifest-xpath-tests.jitsedesmet.be/LICENSE.txt),
+The generator publishes it with the tests as [`LICENSE.txt`](https://comunica.github.io/sparql-manifest-xpath-tests/LICENSE.txt),
 which each manifest links with `dct:license`.
