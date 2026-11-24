@@ -41,6 +41,12 @@ jobs:
             echo "::error::The tests in dist/ differ from the generated ones, run 'yarn run generate' and commit dist/."
             exit 1
           fi
+      # Uploaded here instead of in the deploy job: deploy-pages lists the artifacts of the run right away,
+      # and does not always see an artifact uploaded less than a second earlier.
+      # This also lets a failed deploy job be re-run without a second artifact of the same name.
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
 
   deploy:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
@@ -54,9 +60,5 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/upload-pages-artifact@v5
-        with:
-          path: dist
       - id: deployment
         uses: actions/deploy-pages@v5
